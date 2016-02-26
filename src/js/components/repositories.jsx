@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 /*jshint quotmark:false */
 /*jshint white:false */
 /*jshint trailing:false */
@@ -111,7 +108,7 @@ define(["react",
 
             render: function () {
                 var repositoryItems = this.state.repositories.map(function(repository){
-                    return <RepositoryItem repository={repository} />;
+                    return <RepositoryItem repository={repository} key={repository.id}/>;
                 }.bind(this))
 
                 if (repositoryItems.length == 0)

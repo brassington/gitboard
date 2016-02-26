@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 /*jshint quotmark:false */
 /*jshint white:false */
 /*jshint trailing:false */
@@ -27,12 +24,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
 define(["react",
+        "react-dom",
         "js/utils",
         "js/components/header",
         "js/components/menu",
         "jquery"
         ],
         function (React,
+                  ReactDOM,
                   Utils,
                   Header,
                   Menu,
@@ -68,14 +67,14 @@ define(["react",
                              data={this.props.data}
                              app={this} />;
 
-            //call React.render outside of the render function below.
+            //call ReactDOM.render outside of the render function below.
             //Calling it from within the render function is not supported by React
             //and might break in a future version.
-            React.render(header,
+            ReactDOM.render(header,
               document.getElementById('header')
             );
 
-            React.render(menu,
+            ReactDOM.render(menu,
               document.getElementById('menu')
             );
         },

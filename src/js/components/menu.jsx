@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 /*jshint quotmark:false */
 /*jshint white:false */
 /*jshint trailing:false */
@@ -86,19 +83,19 @@ define(["react","js/utils",
 
                 var menu;
                 if (Utils.isLoggedIn()){
-                    menu = [<ul className="nav navbar-nav">
+                    menu = [<ul className="nav navbar-nav" key={"navbar-loggedin"}>
                         <li><A href={Utils.makeUrl("/repositories")}>Your Repositories</A></li>
                         <li><A href={Utils.makeUrl("/organizations")}>Your Organizations</A></li>
                     </ul>,
-                    <ul className="nav navbar-nav navbar-right">
+                    <ul className="nav navbar-nav navbar-right" key={"navbar-loggedin-right"}>
                         {projectMenu}
                         <li><A href={Utils.makeUrl("/logout")}>Logout</A></li>
                     </ul>];
                 }
                 else{
-                    menu = [<ul className="nav navbar-nav">
+                    menu = [<ul className="nav navbar-nav" key={"navbar-loggedout"}>
                     </ul>,
-                    <ul className="nav navbar-nav navbar-right">
+                    <ul className="nav navbar-nav navbar-right" key={"navbar-loggedout-right"}>
                         <li><A href={Utils.makeUrl("/login")}>Login</A></li>
                         {flashMessagesMenu}
                     </ul>];

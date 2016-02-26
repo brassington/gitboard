@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 define(["react",
         "js/utils",
         "jquery",

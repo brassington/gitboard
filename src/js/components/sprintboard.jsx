@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 /*jshint quotmark:false */
 /*jshint white:false */
 /*jshint trailing:false */
@@ -439,8 +436,8 @@ define(["react",
                     }
                 }
                 return arr;
-            }
-            r = [
+            };
+            var r = [
                 {
                     name : 'repository',
                     endpoint : this.apis.repository.getDetails,

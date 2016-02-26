@@ -16,7 +16,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-var require ={
+//var require ={
+requirejs.config({
   paths: {
     "text" : "assets/js/text",
     "jquery" : "bower_components/jquery/dist/jquery",
@@ -24,6 +25,7 @@ var require ={
     "moment" : "bower_components/momentjs/moment",
     "director" : "bower_components/director/build/director",
     "react": "bower_components/react/react",
+    "react-dom": "bower_components/react/react-dom",
     "sprintf" :"bower_components/sprintf/src/sprintf",
     "markdown":"bower_components/markdown/lib/markdown",
     "marked" : "bower_components/marked/lib/marked",
@@ -44,4 +46,4 @@ var require ={
   },
 baseUrl : "static",
 urlArgs: "bust=" + (new Date()).getTime()
-};
+});

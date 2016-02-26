@@ -51,7 +51,7 @@ chrome-app-production: npm bower assets scripts jsx templates env_settings scss 
 
 production: npm bower assets scripts jsx templates env_settings scss optimize
 
-development: npm bower assets scripts jsx templates env_settings scss watch
+development: npm bower assets scripts jsx templates env_settings scss copy_mainjs remove_material_design_docs watch
 
 optimize: optimize-css optimize-rjs
 
@@ -73,9 +73,11 @@ env_settings:
 
 optimize-css:
 	mkdir -p $(BUILD_DIR)/static/css
-	cleancss -o $(BUILD_DIR)/static/css/main.css $(addprefix $(BUILD_DIR)/static,$(CSS_FILES))
+	# npm install -g clean-css
+	# cleancss -o $(BUILD_DIR)/static/css/main.css $(addprefix $(BUILD_DIR)/static,$(CSS_FILES))
 
 optimize-rjs:
+	npm install -g requirejs
 	r.js -o $(BUILD_DIR)/static/js/build.js
 
 scripts:
@@ -87,7 +89,8 @@ templates:
 	rsync -rupE $(SOURCE_DIR)/templates/ --include="*.html" $(BUILD_DIR)
 
 jsx:
-	jsx $(SOURCE_DIR)/js $(BUILD_DIR)/static/js -x jsx
+	# jsx $(SOURCE_DIR)/js $(BUILD_DIR)/static/js -x jsx
+	babel --presets es2015,react $(SOURCE_DIR)/js --out-dir $(BUILD_DIR)/static/js --source-maps inline
 
 assets:
 	rsync -rupE $(SOURCE_DIR)/assets $(BUILD_DIR)/static
@@ -98,9 +101,13 @@ bower:
 	mkdir -p $(BUILD_DIR)/static
 	bower install --config.directory=$(BUILD_DIR)/static/bower_components
 
+copy_mainjs:
+	cp $(BUILD_DIR)/static/js/main.js $(BUILD_DIR)/static/main.js
+
+remove_material_design_docs:
+	# Necessary to avoid github pages build issues
+	rm -rf $(BUILD_DIR)/static/bower_components/bootstrap-material-design/docs/
+
 watch:
-	@which inotifywait || (echo "Please install inotifywait";exit 2)
-	@while true ; do \
-		inotifywait -r src -e create,delete,move,modify || break; \
-		($(MAKE) assets scripts jsx templates chrome chrome-app scss) || break;\
-	done
+	npm -g install live-server
+	live-server build/

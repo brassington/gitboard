@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 /*jshint quotmark:false */
 /*jshint white:false */
 /*jshint trailing:false */
@@ -75,7 +72,7 @@ define(["react","js/utils","js/flash_messages","jquery"],function (React,Utils,F
         },
 
         render : function(){
-          messageItems = this.state.messages.slice(-5).map(
+          var messageItems = this.state.messages.slice(-5).map(
               function(msg){
                 var title = "Message";
                 switch (msg.data.type){
@@ -90,8 +87,9 @@ define(["react","js/utils","js/flash_messages","jquery"],function (React,Utils,F
                 if (msg.data.sticky === undefined){
                     var elapsedTime = (new Date()).getTime() - msg.receivedAt.getTime();
                     var prepareUnmount = false;
-                    if (elapsedTime > msg.duration+4000)
+                    if (elapsedTime > msg.duration+4000){
                       return undefined;
+                    }
                     if (elapsedTime > msg.duration+1000){
                       prepareUnmount = true;
                     }
@@ -176,7 +174,7 @@ define(["react","js/utils","js/flash_messages","jquery"],function (React,Utils,F
         mixins : [FlashMessagesMixin],
 
         render : function(){
-          messageItems = this.state.messages.map(
+          var messageItems = this.state.messages.map(
               function(msg){
                 var elapsedTime = (new Date()).getTime() - msg.receivedAt.getTime();
                 var prepareUnmount = false;

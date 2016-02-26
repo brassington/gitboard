@@ -20,6 +20,7 @@ define(
     [
         "js/components/app",
         "react",
+        "react-dom",
         "js/utils",
         "js/routes",
         "director",
@@ -27,6 +28,7 @@ define(
     ],
     function (MainApp,
               React,
+              ReactDOM,
               Utils,
               Routes,
               Director,
@@ -39,7 +41,7 @@ define(
     var router = new Director();
 
     function initApp(){
-        appComponent = React.render(app,
+        appComponent = ReactDOM.render(app,
           document.getElementById('app')
         );
     }
@@ -109,13 +111,13 @@ define(
                 props.baseUrl = "/app";
         }
 
-        if (app === undefined)
-        {
+        // if (app === undefined)
+        // {
             app = React.createElement(MainApp,props);
             initApp();
-        }
-        else
-            appComponent.replaceProps(props);
+        // }
+        // else
+        //     appComponent.replaceProps(props);
     }
 
 

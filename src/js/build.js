@@ -22,4 +22,4 @@
       //development build.
       "react": "bower_components/react/react.min"
     }
-})
+});
